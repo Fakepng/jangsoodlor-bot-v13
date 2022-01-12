@@ -20,6 +20,7 @@ class Client extends Discord.Client {
          * @type {Discord.Collection<string, Command>}
          */
         this.commands = new Discord.Collection();
+        this.aliases = new Discord.Collection();
         this.config = config.PREFIX
     }
 
@@ -34,6 +35,7 @@ class Client extends Discord.Client {
                 const command = require(`../Commands/${file}`);
                 console.log(`Command ${command.name} loaded`);
                 this.commands.set(command.name, command);
+                this.aliases.set(command.aliases, command);
             }); 
 
         fs.readdirSync('./src/Events')
