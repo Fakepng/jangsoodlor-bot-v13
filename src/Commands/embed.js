@@ -11,6 +11,6 @@ module.exports = new Command({
         embed.setDescription('This is a test embed description');
         embed.setColor('#FFFF01');
 
-        message.reply({ embeds: [embed] })
+        message.reply({ embeds: [embed] });
     }
 });
