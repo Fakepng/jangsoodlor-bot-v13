@@ -2,7 +2,7 @@ const Command = require('../Structures/Command.js');
 const Discord = require('discord.js');
 
 function checkId(id) {
-    if (id.length != 13) return false;
+    if (id.length != 13) return "Invalid ID";
         for (i = 0, sum = 0; i < 12; i++)
         sum += parseFloat(id.charAt(i)) * (13 - i);
     if ((11 - sum % 11) % 10 != parseFloat(id.charAt(12)))
