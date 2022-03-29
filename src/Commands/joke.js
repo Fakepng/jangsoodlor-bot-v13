@@ -55,8 +55,13 @@ module.exports = new Command({
                     .setStyle('PRIMARY')
             )
 
+        const embed = new Discord.MessageEmbed();
+        embed.setTitle('Joke!');
+        embed.setColor('#FFFF01');
+        embed.setDescription('Choose a category:');
+
         await message.reply({ 
-            content: 'Pick a category!', 
+            embeds: [embed], 
             components: [row1, row2] 
         });
 
@@ -92,9 +97,15 @@ module.exports = new Command({
             }
             axios.get(`https://v2.jokeapi.dev/joke/${type}`).then(function (response) {
                 if (response.data.type === "single") {
-                    i.update({ content: `Category: ${response.data.category}\n${response.data.joke}`, components: []});
+                    embed.setTitle(response.data.joke);
+                    embed.setDescription('');
+                    embed.setFooter(`Category: ${response.data.category}`);
+                    i.update({ embeds: [embed], components: [] });
                 } else {
-                    i.update({ content: `Category: ${response.data.category}\n${response.data.setup} \n ${response.data.delivery}`, components: []});
+                    embed.setTitle(response.data.setup);
+                    embed.setDescription(response.data.delivery);
+                    embed.setFooter(`Category: ${response.data.category}`);
+                    i.update({ embeds: [embed], components: [] });
                 }
             }).catch(function (error) {
                 console.log(error);
